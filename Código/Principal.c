@@ -1,7 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 
-void multiplicacaoMatrixFloat( float *m, float *n, float *p, int tamanho )
+void multiplicacaoMatrizFloat( float *m, float *n, float *p, int tamanho )
 {
 	int i;
 	int j;
@@ -20,9 +21,31 @@ void multiplicacaoMatrixFloat( float *m, float *n, float *p, int tamanho )
 		}
 }
 
-
-int main()
+void criaMatrizesFloat( float **m, float **n, float **p, int tamanho )
 {
+	int N = tamanho * tamanho;
+	(*m) = (float *)malloc( sizeof( float ) * N );
+	(*n) = (float *)malloc( sizeof( float ) * N );
+	(*p) = (float *)malloc( sizeof( float ) * N );
+}
 
+int main( int argc, char *argv[] )
+{
+	int tamanho;
+	float *m = NULL;
+	float *n = NULL;
+	float *p = NULL;
+	if ( argc < 2 )
+	{
+		tamanho = 1000;
+	}
+	else
+	{
+		tamanho = atoi( argv[ 1 ] );
+	}
+	
+	criaMatrizesFloat( &m, &n, &p, tamanho );
+	multiplicacaoMatrizFloat( m, n, p, tamanho );
+	
 	return 0;
 }
