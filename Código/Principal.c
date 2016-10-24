@@ -10,15 +10,55 @@ void multiplicacaoMatrizFloat( float *m, float *n, float *p, int tamanho )
 	for ( i = 0; i < tamanho; ++i )
 		for ( j = 0; j < tamanho; ++j )
 		{
-			double soma = 0;
+			float soma = 0;
 			for ( k = 0; k < tamanho; ++k )
 			{
-				double a = m[ i * tamanho + k ];
-				double b = n[ k * tamanho + j ];
+				float a = m[ i * tamanho + k ];
+				float b = n[ k * tamanho + j ];
 				soma += a * b;
 			}
 			p[ i * tamanho + j ] = soma;
 		}
+}
+
+void geraMatrizDefault( float *m, float *n, int tamanho )
+{
+	int i = 0;
+	int j = 0;
+
+	for ( i = 0; i < tamanho; ++i )
+	{
+		for ( j = 0; j < tamanho; ++j )
+		{
+			m[ i + j ] = 4;
+			n[ i + j ] = 5;
+			//printf("%d ", m[ i + j ]);
+		}
+		//printf("\n");
+
+	}
+
+}
+
+void imprimeMatriz( float *a, int tamanho )
+{
+	int i = 0;
+	int j = 0;
+
+	for ( i = 0; i < tamanho; ++i )
+	{
+		for ( j = 0; j < tamanho; ++j )
+		{
+			//m[ i + j ] = 4;
+			//n[ i + j ] = 5;
+			printf("%.2f ", a[ i + j ]);
+		}
+		printf("\n");
+
+	}
+
+	
+
 }
 
 void criaMatrizesFloat( float **m, float **n, float **p, int tamanho )
@@ -45,7 +85,12 @@ int main( int argc, char *argv[] )
 	}
 	
 	criaMatrizesFloat( &m, &n, &p, tamanho );
+	geraMatrizDefault( m, n, tamanho );
 	multiplicacaoMatrizFloat( m, n, p, tamanho );
-	
+	imprimeMatriz( m, tamanho );
+	printf("------------------------------------\n\n");
+	imprimeMatriz( n, tamanho );
+	printf("------------------------------------\n\n");
+	imprimeMatriz( p, tamanho );	
 	return 0;
 }
