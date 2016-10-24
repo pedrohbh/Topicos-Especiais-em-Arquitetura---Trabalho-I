@@ -30,11 +30,9 @@ void geraMatrizDefault( float *m, float *n, int tamanho )
 	{
 		for ( j = 0; j < tamanho; ++j )
 		{
-			m[ i + j ] = 4;
-			n[ i + j ] = 5;
-			//printf("%d ", m[ i + j ]);
+			m[ i*tamanho + j ] = 4;
+			n[ i*tamanho + j ] = 5;
 		}
-		//printf("\n");
 
 	}
 
@@ -49,8 +47,6 @@ void imprimeMatriz( float *a, int tamanho )
 	{
 		for ( j = 0; j < tamanho; ++j )
 		{
-			//m[ i + j ] = 4;
-			//n[ i + j ] = 5;
 			printf("%.2f ", a[ i + j ]);
 		}
 		printf("\n");
