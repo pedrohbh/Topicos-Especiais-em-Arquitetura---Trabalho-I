@@ -21,7 +21,26 @@ void multiplicacaoMatrizFloat( float *m, float *n, float *p, int tamanho )
 		}
 }
 
-void geraMatrizDefault( float *m, float *n, int tamanho )
+void multiplicacaoMatrizDouble( double *m, double *n, double *p, int tamanho )
+{
+	int i;
+	int j;
+	int k;
+	for ( i = 0; i < tamanho; ++i )
+		for ( j = 0; j < tamanho; ++j )
+		{
+			double soma = 0;
+			for ( k = 0; k < tamanho; ++k )
+			{
+				double a = m[ i * tamanho + k ];
+				double b = n[ k * tamanho + j ];
+				soma += a * b;
+			}
+			p[ i * tamanho + j ] = soma;
+		}
+}
+
+void geraMatrizDefaultFloat( float *m, float *n, int tamanho )
 {
 	int i = 0;
 	int j = 0;
@@ -38,7 +57,7 @@ void geraMatrizDefault( float *m, float *n, int tamanho )
 
 }
 
-void imprimeMatriz( float *a, int tamanho )
+void imprimeMatrizFloat( float *a, int tamanho )
 {
 	int i = 0;
 	int j = 0;
@@ -52,9 +71,31 @@ void imprimeMatriz( float *a, int tamanho )
 		printf("\n");
 
 	}
+}
 
-	
+void imprimeMatrizDouble( double *a, int tamanho )
+{
+	int i = 0;
+	int j = 0;
 
+	for ( i = 0; i < tamanho; ++i )
+	{
+		for ( j = 0; j < tamanho; ++j )
+		{
+			printf("%.2lf ", a[ i + j ]);
+		}
+		printf("\n");
+
+	}
+}
+
+
+void criaMatrizesDouble( double **m, double **n, double **p, int tamanho )
+{
+	int N = tamanho * tamanho;
+	(*m) = (double *)malloc( sizeof( double ) * N );
+	(*n) = (double *)malloc( sizeof( double ) * N );
+	(*p) = (double *)malloc( sizeof( double ) * N );
 }
 
 void criaMatrizesFloat( float **m, float **n, float **p, int tamanho )
@@ -81,12 +122,12 @@ int main( int argc, char *argv[] )
 	}
 	
 	criaMatrizesFloat( &m, &n, &p, tamanho );
-	geraMatrizDefault( m, n, tamanho );
+	geraMatrizDefaultFloat( m, n, tamanho );
 	multiplicacaoMatrizFloat( m, n, p, tamanho );
-	imprimeMatriz( m, tamanho );
+	imprimeMatrizFloat( m, tamanho );
 	printf("------------------------------------\n\n");
-	imprimeMatriz( n, tamanho );
+	imprimeMatrizFloat( n, tamanho );
 	printf("------------------------------------\n\n");
-	imprimeMatriz( p, tamanho );	
+	imprimeMatrizFloat( p, tamanho );	
 	return 0;
 }
