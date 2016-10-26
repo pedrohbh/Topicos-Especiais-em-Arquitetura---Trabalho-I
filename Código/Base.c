@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
 
 void multiplicacaoMatrizFloat( float *m, float *n, float *p, int tamanho )
@@ -84,7 +83,7 @@ void imprimeMatrizFloat( float *a, int tamanho )
 	{
 		for ( j = 0; j < tamanho; ++j )
 		{
-			printf("%.2f ", a[ i*tamanho + j ]);
+			printf("%.2f ", a[ i + j ]);
 		}
 		printf("\n");
 
@@ -100,7 +99,7 @@ void imprimeMatrizDouble( double *a, int tamanho )
 	{
 		for ( j = 0; j < tamanho; ++j )
 		{
-			printf("%.2lf ", a[ i * tamanho + j ]);
+			printf("%.2lf ", a[ i + j ]);
 		}
 		printf("\n");
 
@@ -134,84 +133,13 @@ void criaMatrizesFloat( float **m, float **n, float **p, int tamanho )
 	}
 }
 
-void geraMatrizesFloatRandomico( float *m, float *n, int tamanho )
-{
-	int i = 0;
-	int j = 0;
-	srand( time( 0 ) );
-
-	for ( i = 0; i < tamanho; ++i )
-	{
-		for ( j = 0; j < tamanho; ++j )
-		{
-			m[ i*tamanho + j ] = (rand() % 1001) / (float)1000;
-			n[ i*tamanho + j ] = (rand() % 1001) / (float)1000;
-		}
-
-	}
-
-}
-
-FILE *abreArquivo( char *nomeArquivo )
-{
-	FILE *novoArquivo = fopen( nomeArquivo, "w" );
-	if ( novoArquivo == NULL )
-	{
-		puts("Erro ao abrir/criar o arquivo de entrada");
-		exit( 1 );
-	}
-	fprintf(novoArquivo, "Tamanho;Tempo Total(s)\n");
-	return novoArquivo;
-}
-
-void escreveResultadoArquivo( FILE *arquivo, int tamanho, double tempo )
-{
-	fprintf( arquivo, "%d;%lf\n", tamanho, tempo );
-}
-
-void testesSerialFloat()
-{
-	float *m = NULL;
-	float *n = NULL;
-	float *p = NULL;
-	clock_t tempoInicial;
-	clock_t tempoFinal;
-	double tempoDecorrido;
-	
-	int i;
-	int tamanhoMatriz;
-	FILE *arquivoEntrada = abreArquivo( "ResultadosSerialFloat.txt" );
-	
-	for ( i = 10; i <= 100; i += 10 )
-	{
-		tamanhoMatriz = i;
-		criaMatrizesFloat( &m, &n, &p, tamanhoMatriz );
-		geraMatrizesFloatRandomico( m, n,  tamanhoMatriz );
-		tempoInicial = clock();
-		multiplicacaoMatrizFloat( m, n, p, tamanhoMatriz );
-		tempoFinal = clock();
-		tempoDecorrido = (double)(tempoFinal - tempoInicial) / CLOCKS_PER_SEC;
-		escreveResultadoArquivo( arquivoEntrada, tamanhoMatriz, tempoDecorrido );
-		free( m );
-		free( n );
-		free( p );	
-		
-		
-	}
-	fclose(arquivoEntrada);
-
-}
-
-void testesSerialDouble();
-
 int main( int argc, char *argv[] )
 {
-	testesSerialFloat();
-	/*int tamanho;
-	float *m = NULL;
+	int tamanho;
+	/*float *m = NULL;
 	float *n = NULL;
-	float *p = NULL;
-	/*double *m = NULL;
+	float *p = NULL;*/
+	double *m = NULL;
 	double *n = NULL;
 	double *p = NULL;
 	
@@ -224,13 +152,11 @@ int main( int argc, char *argv[] )
 		tamanho = atoi( argv[ 1 ] );
 	}
 	
-	criaMatrizesFloat( &m, &n, &p, tamanho );
-	//geraMatrizDefaultFloat( m, n, tamanho );
-	geraMatrizesFloatRandomico( m, n, tamanho );
-	//imprimeMatrizFloat( p, tamanho );
-	multiplicacaoMatrizFloat( m, n, p, tamanho );
+	/*criaMatrizesFloat( &m, &n, &p, tamanho );
+	geraMatrizDefaultFloat( m, n, tamanho );
+	multiplicacaoMatrizFloat( m, n, p, tamanho );*/
 
-	/*criaMatrizesDouble( &m, &n, &p, tamanho );
+	criaMatrizesDouble( &m, &n, &p, tamanho );
 	geraMatrizDefaultDouble( m, n, tamanho );
 	multiplicacaoMatrizDouble( m, n, p, tamanho );	
 
@@ -240,7 +166,7 @@ int main( int argc, char *argv[] )
 	printf("------------------------------------\n\n");
 	imprimeMatrizDouble( p, tamanho );
 	
-	imprimeMatrizFloat( m, tamanho );
+	/*imprimeMatrizFloat( m, tamanho );
 	printf("------------------------------------\n\n");
 	imprimeMatrizFloat( n, tamanho );
 	printf("------------------------------------\n\n");
