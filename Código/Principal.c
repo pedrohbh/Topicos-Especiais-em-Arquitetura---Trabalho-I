@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <locale.h>
 
 
 void multiplicacaoMatrizFloat( float *m, float *n, float *p, int tamanho )
@@ -166,6 +167,7 @@ FILE *abreArquivo( char *nomeArquivo )
 
 void escreveResultadoArquivo( FILE *arquivo, int tamanho, double tempo )
 {
+	setlocale(LC_NUMERIC, "");
 	fprintf( arquivo, "%d;%lf\n", tamanho, tempo );
 }
 
@@ -179,18 +181,24 @@ void testesSerialFloat()
 	double tempoDecorrido;
 	
 	int i;
+	int j;
 	int tamanhoMatriz;
 	FILE *arquivoEntrada = abreArquivo( "ResultadosSerialFloat.txt" );
 	
 	for ( i = 10; i <= 100; i += 10 )
 	{
+		tempoDecorrido = 0;
 		tamanhoMatriz = i;
 		criaMatrizesFloat( &m, &n, &p, tamanhoMatriz );
 		geraMatrizesFloatRandomico( m, n,  tamanhoMatriz );
-		tempoInicial = clock();
-		multiplicacaoMatrizFloat( m, n, p, tamanhoMatriz );
-		tempoFinal = clock();
-		tempoDecorrido = (double)(tempoFinal - tempoInicial) / CLOCKS_PER_SEC;
+		for ( j = 0; j < 3; ++j )
+		{
+			tempoInicial = clock();
+			multiplicacaoMatrizFloat( m, n, p, tamanhoMatriz );
+			tempoFinal = clock();
+			tempoDecorrido += (double)(tempoFinal - tempoInicial) / CLOCKS_PER_SEC;
+		}
+		tempoDecorrido /= 3;
 		escreveResultadoArquivo( arquivoEntrada, tamanhoMatriz, tempoDecorrido );
 		free( m );
 		free( n );
