@@ -57,6 +57,23 @@ void geraMatrizDefaultFloat( float *m, float *n, int tamanho )
 
 }
 
+void geraMatrizDefaultDouble( double *m, double *n, int tamanho )
+{
+	int i = 0;
+	int j = 0;
+
+	for ( i = 0; i < tamanho; ++i )
+	{
+		for ( j = 0; j < tamanho; ++j )
+		{
+			m[ i*tamanho + j ] = 4;
+			n[ i*tamanho + j ] = 5;
+		}
+
+	}
+
+}
+
 void imprimeMatrizFloat( float *a, int tamanho )
 {
 	int i = 0;
@@ -96,6 +113,11 @@ void criaMatrizesDouble( double **m, double **n, double **p, int tamanho )
 	(*m) = (double *)malloc( sizeof( double ) * N );
 	(*n) = (double *)malloc( sizeof( double ) * N );
 	(*p) = (double *)malloc( sizeof( double ) * N );
+	if ( m == NULL || n == NULL || p == NULL )
+	{
+		puts("Erro ao alocar as matrizes");
+		exit( 1 );
+	}
 }
 
 void criaMatrizesFloat( float **m, float **n, float **p, int tamanho )
@@ -104,14 +126,23 @@ void criaMatrizesFloat( float **m, float **n, float **p, int tamanho )
 	(*m) = (float *)malloc( sizeof( float ) * N );
 	(*n) = (float *)malloc( sizeof( float ) * N );
 	(*p) = (float *)malloc( sizeof( float ) * N );
+	if ( m == NULL || n == NULL || p == NULL )
+	{
+		puts("Erro ao alocar as matrizes");
+		exit( 1 );
+	}
 }
 
 int main( int argc, char *argv[] )
 {
 	int tamanho;
-	float *m = NULL;
+	/*float *m = NULL;
 	float *n = NULL;
-	float *p = NULL;
+	float *p = NULL;*/
+	double *m = NULL;
+	double *n = NULL;
+	double *p = NULL;
+	
 	if ( argc < 2 )
 	{
 		tamanho = 1000;
@@ -121,13 +152,24 @@ int main( int argc, char *argv[] )
 		tamanho = atoi( argv[ 1 ] );
 	}
 	
-	criaMatrizesFloat( &m, &n, &p, tamanho );
+	/*criaMatrizesFloat( &m, &n, &p, tamanho );
 	geraMatrizDefaultFloat( m, n, tamanho );
-	multiplicacaoMatrizFloat( m, n, p, tamanho );
-	imprimeMatrizFloat( m, tamanho );
+	multiplicacaoMatrizFloat( m, n, p, tamanho );*/
+
+	criaMatrizesDouble( &m, &n, &p, tamanho );
+	geraMatrizDefaultDouble( m, n, tamanho );
+	multiplicacaoMatrizDouble( m, n, p, tamanho );	
+
+	imprimeMatrizDouble( m, tamanho );
+	printf("------------------------------------\n\n");
+	imprimeMatrizDouble( n, tamanho );
+	printf("------------------------------------\n\n");
+	imprimeMatrizDouble( p, tamanho );
+	
+	/*imprimeMatrizFloat( m, tamanho );
 	printf("------------------------------------\n\n");
 	imprimeMatrizFloat( n, tamanho );
 	printf("------------------------------------\n\n");
-	imprimeMatrizFloat( p, tamanho );	
+	imprimeMatrizFloat( p, tamanho );*/
 	return 0;
 }
