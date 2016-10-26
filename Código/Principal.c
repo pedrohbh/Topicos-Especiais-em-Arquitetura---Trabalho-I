@@ -171,6 +171,25 @@ void escreveResultadoArquivo( FILE *arquivo, int tamanho, double tempo )
 	fprintf( arquivo, "%d;%lf\n", tamanho, tempo );
 }
 
+void geraMatrizesDoubleRandomico( double *m, double *n, int tamanho )
+{
+	int i = 0;
+	int j = 0;
+	srand( time( 0 ) );
+
+	for ( i = 0; i < tamanho; ++i )
+	{
+		for ( j = 0; j < tamanho; ++j )
+		{
+			m[ i*tamanho + j ] = (rand() % 1001) / (double)1000;
+			n[ i*tamanho + j ] = (rand() % 1001) / (double)1000;
+		}
+
+	}
+
+}
+
+
 void testesSerialFloat()
 {
 	float *m = NULL;
@@ -202,7 +221,7 @@ void testesSerialFloat()
 		escreveResultadoArquivo( arquivoEntrada, tamanhoMatriz, tempoDecorrido );
 		free( m );
 		free( n );
-		free( p );	
+		free( p );
 		
 		
 	}
@@ -210,11 +229,49 @@ void testesSerialFloat()
 
 }
 
-void testesSerialDouble();
+void testesSerialDouble()
+{
+	double *m = NULL;
+	double *n = NULL;
+	double *p = NULL;
+	clock_t tempoInicial;
+	clock_t tempoFinal;
+	double tempoDecorrido;
+	
+	int i;
+	int j;
+	int tamanhoMatriz;
+	FILE *arquivoEntrada = abreArquivo( "ResultadosSerialDouble.txt" );
+	
+	for ( i = 10; i <= 100; i += 10 )
+	{
+		tempoDecorrido = 0;
+		tamanhoMatriz = i;
+		criaMatrizesDouble( &m, &n, &p, tamanhoMatriz );
+		geraMatrizesDoubleRandomico( m, n,  tamanhoMatriz );
+		for ( j = 0; j < 3; ++j )
+		{
+			tempoInicial = clock();
+			multiplicacaoMatrizDouble( m, n, p, tamanhoMatriz );
+			tempoFinal = clock();
+			tempoDecorrido += (double)(tempoFinal - tempoInicial) / CLOCKS_PER_SEC;
+		}
+		tempoDecorrido /= 3;
+		escreveResultadoArquivo( arquivoEntrada, tamanhoMatriz, tempoDecorrido );
+		free( m );
+		free( n );
+		free( p );
+		
+		
+	}
+	fclose(arquivoEntrada);
+
+}
 
 int main( int argc, char *argv[] )
 {
 	testesSerialFloat();
+	testesSerialDouble();
 	/*int tamanho;
 	float *m = NULL;
 	float *n = NULL;
