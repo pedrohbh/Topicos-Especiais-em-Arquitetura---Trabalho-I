@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
 #include <locale.h>
 
 
@@ -205,10 +206,10 @@ void testesSerialFloat()
 	int tamanhoMatriz;
 	FILE *arquivoEntrada = abreArquivo( "ResultadosSerialFloat.txt" );
 	
-	for ( i = 10; i <= 100; i += 10 )
+	for ( i = 7; i <= 11; i++ )
 	{
 		tempoDecorrido = 0;
-		tamanhoMatriz = i;
+		tamanhoMatriz = pow( 2, i );
 		criaMatrizesFloat( &m, &n, &p, tamanhoMatriz );
 		geraMatrizesFloatRandomico( m, n,  tamanhoMatriz );
 		for ( j = 0; j < 3; ++j )
@@ -230,10 +231,10 @@ void testesSerialFloat()
 
 	// Para Testar 100 vezes
 	arquivoEntrada = abreArquivo( "ResultadosSerialFloat100vezes.txt" );
-	for ( i = 10; i <= 100; i += 10 )
+	for ( i = 7; i <= 11; i++ )
 	{
 		tempoDecorrido = 0;
-		tamanhoMatriz = i;
+		tamanhoMatriz = pow( 2, i );
 		criaMatrizesFloat( &m, &n, &p, tamanhoMatriz );
 		geraMatrizesFloatRandomico( m, n,  tamanhoMatriz );
 		for ( k = 0; k < 100; k++ )
@@ -257,10 +258,10 @@ void testesSerialFloat()
 
 	// Para Testar 1000 vezes
 	arquivoEntrada = abreArquivo( "ResultadosSerialFloat1000vezes.txt" );
-	for ( i = 10; i <= 100; i += 10 )
+	for ( i = 7; i <= 11; i++ )
 	{
 		tempoDecorrido = 0;
-		tamanhoMatriz = i;
+		tamanhoMatriz = pow( 2, i );
 		criaMatrizesFloat( &m, &n, &p, tamanhoMatriz );
 		geraMatrizesFloatRandomico( m, n,  tamanhoMatriz );
 		for ( k = 0; k < 1000; k++ )
@@ -299,10 +300,10 @@ void testesSerialDouble()
 	int tamanhoMatriz;
 	FILE *arquivoEntrada = abreArquivo( "ResultadosSerialDouble.txt" );
 	
-	for ( i = 10; i <= 100; i += 10 )
+	for ( i = 7; i <= 11; i++ )
 	{
 		tempoDecorrido = 0;
-		tamanhoMatriz = i;
+		tamanhoMatriz = pow( 2, i );
 		criaMatrizesDouble( &m, &n, &p, tamanhoMatriz );
 		geraMatrizesDoubleRandomico( m, n,  tamanhoMatriz );
 		for ( j = 0; j < 3; ++j )
@@ -324,10 +325,10 @@ void testesSerialDouble()
 
 	// Para Testar 100 vezes
 	arquivoEntrada = abreArquivo( "ResultadosSerialDouble100vezes.txt" );
-	for ( i = 10; i <= 100; i += 10 )
+	for ( i = 7; i <= 11; i++ )
 	{
 		tempoDecorrido = 0;
-		tamanhoMatriz = i;
+		tamanhoMatriz = pow( 2, i );
 		criaMatrizesDouble( &m, &n, &p, tamanhoMatriz );
 		geraMatrizesDoubleRandomico( m, n,  tamanhoMatriz );
 		for ( k = 0; k < 100; k++ )
@@ -351,10 +352,10 @@ void testesSerialDouble()
 
 	// Para Testar 1000 vezes
 	arquivoEntrada = abreArquivo( "ResultadosSerialDouble1000vezes.txt" );
-	for ( i = 10; i <= 100; i += 10 )
+	for ( i = 7; i <= 11; i++ )
 	{
 		tempoDecorrido = 0;
-		tamanhoMatriz = i;
+		tamanhoMatriz = pow( 2, i );
 		criaMatrizesDouble( &m, &n, &p, tamanhoMatriz );
 		geraMatrizesDoubleRandomico( m, n,  tamanhoMatriz );
 		for ( k = 0; k < 1000; k++ )
@@ -379,7 +380,7 @@ void testesSerialDouble()
 int main( int argc, char *argv[] )
 {
 	testesSerialFloat();
-	testesSerialDouble();
+	//testesSerialDouble();
 	/*int tamanho;
 	float *m = NULL;
 	float *n = NULL;
