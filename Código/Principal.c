@@ -201,6 +201,7 @@ void testesSerialFloat()
 	
 	int i;
 	int j;
+	int k;
 	int tamanhoMatriz;
 	FILE *arquivoEntrada = abreArquivo( "ResultadosSerialFloat.txt" );
 	
@@ -226,6 +227,60 @@ void testesSerialFloat()
 		
 	}
 	fclose(arquivoEntrada);
+
+	// Para Testar 100 vezes
+	arquivoEntrada = abreArquivo( "ResultadosSerialFloat100vezes.txt" );
+	for ( i = 10; i <= 100; i += 10 )
+	{
+		tempoDecorrido = 0;
+		tamanhoMatriz = i;
+		criaMatrizesFloat( &m, &n, &p, tamanhoMatriz );
+		geraMatrizesFloatRandomico( m, n,  tamanhoMatriz );
+		for ( k = 0; k < 100; k++ )
+		{
+			for ( j = 0; j < 3; ++j )
+			{
+				tempoInicial = clock();
+				multiplicacaoMatrizFloat( m, n, p, tamanhoMatriz );
+				tempoFinal = clock();
+				tempoDecorrido += (double)(tempoFinal - tempoInicial) / CLOCKS_PER_SEC;
+			}			
+		}
+		tempoDecorrido /= 3;
+		escreveResultadoArquivo( arquivoEntrada, tamanhoMatriz, tempoDecorrido );
+		free( m );
+		free( n );
+		free( p );
+	}
+	fclose(arquivoEntrada);
+	
+
+	// Para Testar 1000 vezes
+	arquivoEntrada = abreArquivo( "ResultadosSerialFloat1000vezes.txt" );
+	for ( i = 10; i <= 100; i += 10 )
+	{
+		tempoDecorrido = 0;
+		tamanhoMatriz = i;
+		criaMatrizesFloat( &m, &n, &p, tamanhoMatriz );
+		geraMatrizesFloatRandomico( m, n,  tamanhoMatriz );
+		for ( k = 0; k < 1000; k++ )
+		{
+			for ( j = 0; j < 3; ++j )
+			{
+				tempoInicial = clock();
+				multiplicacaoMatrizFloat( m, n, p, tamanhoMatriz );
+				tempoFinal = clock();
+				tempoDecorrido += (double)(tempoFinal - tempoInicial) / CLOCKS_PER_SEC;
+			}			
+		}
+		tempoDecorrido /= 3;
+		escreveResultadoArquivo( arquivoEntrada, tamanhoMatriz, tempoDecorrido );
+		free( m );
+		free( n );
+		free( p );
+	}
+	fclose(arquivoEntrada);
+
 
 }
 
