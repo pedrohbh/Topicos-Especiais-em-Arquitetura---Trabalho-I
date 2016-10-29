@@ -295,6 +295,7 @@ void testesSerialDouble()
 	
 	int i;
 	int j;
+	int k;
 	int tamanhoMatriz;
 	FILE *arquivoEntrada = abreArquivo( "ResultadosSerialDouble.txt" );
 	
@@ -321,6 +322,58 @@ void testesSerialDouble()
 	}
 	fclose(arquivoEntrada);
 
+	// Para Testar 100 vezes
+	arquivoEntrada = abreArquivo( "ResultadosSerialDouble100vezes.txt" );
+	for ( i = 10; i <= 100; i += 10 )
+	{
+		tempoDecorrido = 0;
+		tamanhoMatriz = i;
+		criaMatrizesDouble( &m, &n, &p, tamanhoMatriz );
+		geraMatrizesDoubleRandomico( m, n,  tamanhoMatriz );
+		for ( k = 0; k < 100; k++ )
+		{
+			for ( j = 0; j < 3; ++j )
+			{
+				tempoInicial = clock();
+				multiplicacaoMatrizDouble( m, n, p, tamanhoMatriz );
+				tempoFinal = clock();
+				tempoDecorrido += (double)(tempoFinal - tempoInicial) / CLOCKS_PER_SEC;
+			}			
+		}
+		tempoDecorrido /= 3;
+		escreveResultadoArquivo( arquivoEntrada, tamanhoMatriz, tempoDecorrido );
+		free( m );
+		free( n );
+		free( p );
+	}
+	fclose(arquivoEntrada);
+	
+
+	// Para Testar 1000 vezes
+	arquivoEntrada = abreArquivo( "ResultadosSerialDouble1000vezes.txt" );
+	for ( i = 10; i <= 100; i += 10 )
+	{
+		tempoDecorrido = 0;
+		tamanhoMatriz = i;
+		criaMatrizesDouble( &m, &n, &p, tamanhoMatriz );
+		geraMatrizesDoubleRandomico( m, n,  tamanhoMatriz );
+		for ( k = 0; k < 1000; k++ )
+		{
+			for ( j = 0; j < 3; ++j )
+			{
+				tempoInicial = clock();
+				multiplicacaoMatrizDouble( m, n, p, tamanhoMatriz );
+				tempoFinal = clock();
+				tempoDecorrido += (double)(tempoFinal - tempoInicial) / CLOCKS_PER_SEC;
+			}			
+		}
+		tempoDecorrido /= 3;
+		escreveResultadoArquivo( arquivoEntrada, tamanhoMatriz, tempoDecorrido );
+		free( m );
+		free( n );
+		free( p );
+	}
+	fclose(arquivoEntrada);
 }
 
 int main( int argc, char *argv[] )
