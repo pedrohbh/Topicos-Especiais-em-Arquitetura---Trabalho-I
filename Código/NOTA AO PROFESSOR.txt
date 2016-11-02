@@ -1,5 +1,5 @@
 1- O Makefile corresponde a compilação do código matrixCuda.cu;
 
-2 - Para o código Principal.c, que contém a implementação sequencial, no terminal digite "gcc Principal.c -lm"(sem as aspas);
+2 - Para compilar o código Principal.c, que contém a implementação sequencial, no terminal digite "gcc Principal.c -lm"(sem as aspas);
 
 3 - Os códigos contidos na pasta "Auxiliar" foram utilizados para depuração e testes e portanto não devem ser submetidos a avaliação.
