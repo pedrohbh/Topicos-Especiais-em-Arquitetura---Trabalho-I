@@ -217,7 +217,7 @@ endif
 all: build
 
 build: 
-matrixMul
+	matrixMul
 
 check.deps:
 ifeq ($(SAMPLE_ENABLED),0)

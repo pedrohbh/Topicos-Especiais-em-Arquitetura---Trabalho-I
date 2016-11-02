@@ -206,7 +206,7 @@ void testesSerialFloat()
 	int tamanhoMatriz;
 	FILE *arquivoEntrada = abreArquivo( "ResultadosSerialFloat.txt" );
 	
-	for ( i = 7; i <= 11; i++ )
+	for ( i = 7; i < 11; i++ )
 	{
 		tempoDecorrido = 0;
 		tamanhoMatriz = pow( 2, i );
@@ -231,7 +231,7 @@ void testesSerialFloat()
 
 	// Para Testar 100 vezes
 	arquivoEntrada = abreArquivo( "ResultadosSerialFloat100vezes.txt" );
-	for ( i = 7; i <= 11; i++ )
+	for ( i = 7; i < 11; i++ )
 	{
 		tempoDecorrido = 0;
 		tamanhoMatriz = pow( 2, i );
@@ -258,7 +258,7 @@ void testesSerialFloat()
 
 	// Para Testar 1000 vezes
 	arquivoEntrada = abreArquivo( "ResultadosSerialFloat1000vezes.txt" );
-	for ( i = 7; i <= 11; i++ )
+	for ( i = 7; i < 11; i++ )
 	{
 		tempoDecorrido = 0;
 		tamanhoMatriz = pow( 2, i );
@@ -300,7 +300,7 @@ void testesSerialDouble()
 	int tamanhoMatriz;
 	FILE *arquivoEntrada = abreArquivo( "ResultadosSerialDouble.txt" );
 	
-	for ( i = 7; i <= 11; i++ )
+	for ( i = 7; i < 11; i++ )
 	{
 		tempoDecorrido = 0;
 		tamanhoMatriz = pow( 2, i );
@@ -325,7 +325,7 @@ void testesSerialDouble()
 
 	// Para Testar 100 vezes
 	arquivoEntrada = abreArquivo( "ResultadosSerialDouble100vezes.txt" );
-	for ( i = 7; i <= 11; i++ )
+	for ( i = 7; i < 11; i++ )
 	{
 		tempoDecorrido = 0;
 		tamanhoMatriz = pow( 2, i );
@@ -352,7 +352,7 @@ void testesSerialDouble()
 
 	// Para Testar 1000 vezes
 	arquivoEntrada = abreArquivo( "ResultadosSerialDouble1000vezes.txt" );
-	for ( i = 7; i <= 11; i++ )
+	for ( i = 7; i < 11; i++ )
 	{
 		tempoDecorrido = 0;
 		tamanhoMatriz = pow( 2, i );
@@ -380,44 +380,7 @@ void testesSerialDouble()
 int main( int argc, char *argv[] )
 {
 	testesSerialFloat();
-	//testesSerialDouble();
-	/*int tamanho;
-	float *m = NULL;
-	float *n = NULL;
-	float *p = NULL;
-	/*double *m = NULL;
-	double *n = NULL;
-	double *p = NULL;
-	
-	if ( argc < 2 )
-	{
-		tamanho = 1000;
-	}
-	else
-	{
-		tamanho = atoi( argv[ 1 ] );
-	}
-	
-	criaMatrizesFloat( &m, &n, &p, tamanho );
-	//geraMatrizDefaultFloat( m, n, tamanho );
-	geraMatrizesFloatRandomico( m, n, tamanho );
-	//imprimeMatrizFloat( p, tamanho );
-	multiplicacaoMatrizFloat( m, n, p, tamanho );
+	testesSerialDouble();
 
-	/*criaMatrizesDouble( &m, &n, &p, tamanho );
-	geraMatrizDefaultDouble( m, n, tamanho );
-	multiplicacaoMatrizDouble( m, n, p, tamanho );	
-
-	imprimeMatrizDouble( m, tamanho );
-	printf("------------------------------------\n\n");
-	imprimeMatrizDouble( n, tamanho );
-	printf("------------------------------------\n\n");
-	imprimeMatrizDouble( p, tamanho );
-	
-	imprimeMatrizFloat( m, tamanho );
-	printf("------------------------------------\n\n");
-	imprimeMatrizFloat( n, tamanho );
-	printf("------------------------------------\n\n");
-	imprimeMatrizFloat( p, tamanho );*/
 	return 0;
 }

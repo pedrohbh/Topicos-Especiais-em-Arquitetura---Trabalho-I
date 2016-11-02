@@ -130,7 +130,7 @@ void MatMul(const Matrix A, const Matrix B, Matrix C)
     error = cudaEventRecord(start, NULL);
 
 //    tinicial = clock();
-
+	#pragma omp parallel for private( t ) shared( d_A, d_B, d_C, qtdite, dimGrid, dimBlock )
     for (int t=0; t<qtdite; ++t)
     {
       // printf("executando a iteracao %d\n",t);

@@ -1,0 +1,1 @@
+Caro Professor Alberto, os códigos contidos na pasta "Auxiliar" foram utilizados para depuração e testes e portanto não devem ser submetidos a avaliação.
